@@ -8,3 +8,9 @@ class Receiver:
 
     def decrypt(self, m):
         return self.cryptography.decrypt(self.privateKey, m)
+
+    def __str__(self):
+        return 'Receiver:'+\
+               '\n    Cryptography='+str(self.cryptography)+\
+               '\n    public key='+str(self.publicKey)+\
+               '\n    private key='+ str(self.privateKey)

@@ -1,34 +1,31 @@
 from Mods.Math.Calculation import Calulation
-from Mods.PublicKeyCryptography.Key import PublicKey
-from Mods.PublicKeyCryptography.Key import PrivateKey
+from Mods.PublicKeyCryptography.Key import Key
 from Mods.PublicKeyCryptography.Cryptography import Cryptography
 import math
 
 
 class RSA(Cryptography):
     @staticmethod
+    def calculate(key, m):
+        m1 = 1
+        (e, n) = key.get_key()
+
+        for i in range(e):
+            m1 = (m1 * m) % n
+
+        return m1
+
+    @staticmethod
     def crypt(key, m):
         if isinstance(m, int):
-            m1 = 1
-            (e, n) = key.get_key()
-
-            for i in range(e):
-                m1 = (m1*m) % n
-
-            return m1
+            return RSA.calculate(key, m)
         elif isinstance(m, str):
             return [RSA.crypt(key, s) for s in Calulation.ordstr(m)]
 
     @staticmethod
     def decrypt(key, c):
         if isinstance(c, int):
-            c1 = 1
-            (d, n) = key.get_key()
-
-            for i in range(d):
-                c1 = (c1*c) % n
-
-            return c1
+            return RSA.calculate(key, c)
         elif isinstance(c, list):
             return Calulation.chrlist([RSA.decrypt(key, s) for s in c])
 
@@ -40,7 +37,8 @@ class RSA(Cryptography):
         e = RSA.get_public_key_exp(lam)
         d = RSA.get_private_key_exp(e, lam)
 
-        return (PublicKey((e, n)), PrivateKey((d, n)))
+        return (Key((e, n)), Key((d, n)))
+        #(public key, private key)
 
     @staticmethod
     def get_lambda(p, q):
