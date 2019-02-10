@@ -2,5 +2,4 @@
 *.xml
 venv/
 .idea/
-Mods/Math/__pycache__/Calculation.cpython-36.pyc
 *.pyc
