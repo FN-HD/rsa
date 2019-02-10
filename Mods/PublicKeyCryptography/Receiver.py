@@ -3,8 +3,11 @@ class Receiver:
         self.cryptography = cryptography
         (self.publicKey, self.privateKey) = cryptography.get_key(o)
 
-    def get_key(self):
+    def get_public_key(self):
         return self.publicKey
+
+    def get_private_key(self):
+        return self.privateKey
 
     def decrypt(self, m):
         return self.cryptography.decrypt(self.privateKey, m)

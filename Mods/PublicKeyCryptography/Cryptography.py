@@ -11,4 +11,4 @@ class Cryptography:
 
     @staticmethod
     def get_key(data):
-        return Key(data)
+        return (Key(data), Key(data))

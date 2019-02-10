@@ -1,6 +1,6 @@
 class Sender:
-    def __init__(self, crptography, key):
-        self.cryptography = crptography
+    def __init__(self, cryptography, key):
+        self.cryptography = cryptography
         self.publicKey = key
 
     def crypt(self, m):
