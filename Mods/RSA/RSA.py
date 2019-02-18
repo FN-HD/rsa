@@ -1,7 +1,6 @@
 from Mods.Math.Calculation import Calculation
-from Mods.PublicKeyCryptography.Key import Key
-from Mods.PublicKeyCryptography.Cryptography import Cryptography
-import math
+from Mods.Cryptography.Cryptography import Key
+from Mods.Cryptography.Cryptography import Cryptography
 
 
 class RSA(Cryptography):
@@ -12,11 +11,11 @@ class RSA(Cryptography):
         return Calculation.pow_in_residue_n(m, e, n)
 
     @staticmethod
-    def crypt(key, m):
+    def encrypt(key, m):
         if isinstance(m, int):
             return RSA.calculate(key, m)
         elif isinstance(m, str):
-            return [RSA.crypt(key, s) for s in Calculation.ordstr(m)]
+            return [RSA.encrypt(key, s) for s in Cryptography.ordstr(m)]
         else:
             raise TypeError('you should input int or str')
 
@@ -25,7 +24,7 @@ class RSA(Cryptography):
         if isinstance(c, int):
             return RSA.calculate(key, c)
         elif isinstance(c, list):
-            return Calculation.chrlist([RSA.decrypt(key, s) for s in c])
+            return Cryptography.chrlist([RSA.decrypt(key, s) for s in c])
         else:
             raise TypeError('you should input int or list')
 
@@ -44,8 +43,8 @@ class RSA(Cryptography):
 
     @staticmethod
     def get_public_key_exp(lam):
-        size = Calculation.get_int_size(lam)
-        return Calculation.get_int(lam,  size, size+1)
+        digit = Calculation.get_int_digit(lam)
+        return Calculation.get_random_prime_int(lam,  10*digit)
 
     @staticmethod
     def get_private_key_exp(e, lam):

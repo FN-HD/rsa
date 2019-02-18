@@ -3,10 +3,6 @@ import random
 
 
 class Calculation:
-    @staticmethod
-    def chrlist(i):
-        return ''.join([chr(code) for code in i])
-
     # 拡張ユーグリッドの互除法
     @staticmethod
     def extgcd(x, y):
@@ -19,22 +15,25 @@ class Calculation:
             v = u0 - (x//y)*v0
         return [u, v]
 
+    # we can get the number prime to a.
     @staticmethod
-    def get_int(a, b=0, c=4):
-        primes = [i for i in range(10 ** b, 10 ** c) if math.gcd(a, i) == 1]
+    def get_random_prime_int(a, b=0, c=0):
+
+        if c > a or b > c:
+            c = a
+
+        primes = [i for i in range(b, c) if math.gcd(a, i) == 1]
         return primes[int(len(primes) * random.random())]
 
+    # we can get integer digit.
     @staticmethod
-    def get_int_size(n):
+    def get_int_digit(n):
         return int(math.log10(n))
 
+    # we can get least common multiplier.
     @staticmethod
     def lcm(p, q):
         return int(p * q / math.gcd(p, q))
-
-    @staticmethod
-    def ordstr(c):
-        return [ord(i) for i in c]
 
     # (m**e)%n
     @staticmethod
