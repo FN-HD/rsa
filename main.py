@@ -15,7 +15,7 @@ sender_b = Sender(ob, receiver_a.get_public_key())
 print('送信側を生成:'+str(time.time()-start)+'\n'+str(sender_b)+'\n')
 
 str1 = 'The quick onyx goblin jumps over the lazy dwarf.'
-# str1 = input('please input message.')
+str1 = input('please input message.')
 print('メッセージ:\n    '+str1+'\n')
 
 start = time.time()
